@@ -1,0 +1,5 @@
+sudo npm install --save vue-cli
+vue init webpack app2pay
+cd app2pay/
+npm install
+npm run dev

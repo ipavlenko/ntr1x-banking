@@ -1,0 +1,28 @@
+.my.my-bills {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+
+    >.my.my-header {
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 64px;
+    }
+
+    >.my.my-body {
+
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        bottom: 0px;
+        background-color: red;
+        overflow-y: scroll;
+    }
+}
