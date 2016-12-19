@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
-import VueMaterial from 'vue-material'
+import VueMaterial from './material'
+import AppComponents from './components'
 // import VueMy from 'components'
 
 import Stores from 'stores'
@@ -14,15 +15,18 @@ Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(VueMaterial)
+Vue.use(AppComponents)
+
+// console.log(VueMaterial)
 // Vue.use(VueMy)
 
-Vue.material.theme.registerAll()
+// Vue.material.theme.registerAll()
 
 const store = new Vuex.Store({
     strict: true,
     modules: {
-        security: Stores.Security({ endpoint: 'http://app2pay.com/ws' }),
-        bills: Stores.Bills({ endpoint: 'http://app2pay.com/ws' })
+        security: new Stores.Security(),
+        bills: new Stores.Bills()
     }
 })
 
@@ -36,12 +40,12 @@ const routes = [
         component: Pages.Private,
         children: [
             {
-                path: 'about',
-                component: Pages.About
+                path: 'accounts',
+                component: Pages.Accounts
             },
             {
-                path: 'bills',
-                component: Pages.Bills
+                path: 'contacts',
+                component: Pages.Contacts
             },
             {
                 path: 'profile',
@@ -67,18 +71,18 @@ const router = new VueRouter({
     routes
 })
 
-router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.auth)) {
-        if (!store.state.security.principal) {
-            next({
-                path: '/signin',
-                query: { redirect: to.fullPath }
-            })
-            return
-        }
-    }
-    next()
-})
+// router.beforeEach((to, from, next) => {
+//     if (to.matched.some((record) => record.meta.auth)) {
+//         if (!store.state.security.principal) {
+//             next({
+//                 path: '/signin',
+//                 query: { redirect: to.fullPath }
+//             })
+//             return
+//         }
+//     }
+//     next()
+// })
 
 /* eslint-disable no-new */
 new Vue({

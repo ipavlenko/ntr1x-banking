@@ -1,6 +1,4 @@
-import Vue from 'vue'
-
-export default ({ endpoint }) => ({
+export default () => ({
 
     state: {
         principal: null
@@ -15,22 +13,25 @@ export default ({ endpoint }) => ({
     actions: {
 
         'security/signin': ({ commit, dispatch, state }, { email, password }) => {
-            return Vue.http
-                .post(`${endpoint}/signin`, { email, password })
-                .then(
-                    (d) => {
-                        commit('security/principal', d.data.principal)
-                        dispatch('bills/load', { id: d.data.principal.id })
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if (email === 'admin@example.com' && password === 'admin123') {
+                        commit('security/principal', { email: email })
+                        resolve(state.principal)
+                    } else {
+                        reject()
                     }
-                )
+                }, 200)
+            })
         },
 
         'security/signout': ({ commit, state }) => {
-            return Vue.http
-                .post(`${endpoint}/signout`)
-                .then(
-                    (d) => { commit('security/principal', null) },
-                )
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    commit('security/principal', null)
+                    resolve(state.principal)
+                }, 200)
+            })
         }
     }
 })

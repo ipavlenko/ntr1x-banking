@@ -1,23 +1,22 @@
-<section class="my my-private" v-md-theme="'default'">
+<section class="my my-private">
     <section class="my my-body">
         <div class="my my-container">
-            <router-view></router-view>
+            <transition :name="transitionName">
+                <router-view class="child-view"></router-view>
+            </transition>
         </div>
     </section>
     <section class="my my-footer">
         <div class="my my-container">
             <md-bottom-bar md-shift>
-                <span @click.prevent="$router.push({ path: '/private/about' })">
-                    <md-bottom-bar-item md-icon="home" :md-active="$route.path == '/private/about'">Дашборд</md-bottom-bar-item>
+                <span @click.prevent="$router.push({ path: '/private/accounts' })">
+                    <md-bottom-bar-item md-icon="credit_card" :md-active="$route.path == '/private/accounts'">Accounts</md-bottom-bar-item>
                 </span>
-                <span @click.prevent="$router.push({ path: '/private/bills' })">
-                    <md-bottom-bar-item md-icon="receipt" :md-active="$route.path == '/private/bills'">Счета</md-bottom-bar-item>
+                <span @click.prevent="$router.push({ path: '/private/contacts' })">
+                    <md-bottom-bar-item md-icon="email" :md-active="$route.path == '/private/contacts'">Contacts</md-bottom-bar-item>
                 </span>
-                <span @click.prevent="$router.push({ path: '/private/calendar' })">
-                    <md-bottom-bar-item md-icon="event" :md-active="$route.path == '/private/calendar'">Календарь</md-bottom-bar-item>
-                </span>
-                <span @click="$router.push({ path: '/private/profile' })" :md-active="$route.path == '/private/profile'">
-                    <md-bottom-bar-item md-icon="account_box">Профиль</md-bottom-bar-item>
+                <span @click.prevent="$router.push({ path: '/private/profile' })">
+                    <md-bottom-bar-item md-icon="account_box" :md-active="$route.path == '/private/profile'">Profile</md-bottom-bar-item>
                 </span>
             </md-bottom-bar>
         </div>

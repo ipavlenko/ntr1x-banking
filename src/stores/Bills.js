@@ -1,7 +1,7 @@
-export default ({ endpoint, incoming }) => ({
+export default () => ({
 
     state: {
-        incoming: incoming || []
+        incoming: []
     },
 
     mutations: {
@@ -13,7 +13,7 @@ export default ({ endpoint, incoming }) => ({
     actions: {
 
         'bills/load': ({ commit, state }) => {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 setTimeout(() => {
                     commit('bills/store', [
                         { id: 1, purpose: 'Красная площадь д. 1: Отопление', value: 2000, status: null },
@@ -23,6 +23,7 @@ export default ({ endpoint, incoming }) => ({
                         { id: 5, purpose: 'Штраф за стоп-линию: o001oo177', value: 500, status: null },
                         { id: 6, purpose: 'Платёж по кредиту на машину', value: 12000, status: null }
                     ])
+                    resolve(state.incoming)
                 }, 200)
             })
         },

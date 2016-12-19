@@ -1,0 +1,16 @@
+<section class="my my-bills">
+    <section class="my my-header">
+        <md-toolbar>
+            <md-button class="md-icon-button" @click="$refs.left.toggle()">
+                <md-icon>menu</md-icon>
+            </md-button>
+            <h2 class="md-title" style="flex: 1">Accounts</h2>
+            <md-button class="md-icon-button">
+                <md-icon>refresh</md-icon>
+            </md-button>
+        </md-toolbar>
+    </section>
+    <section class="my my-body">
+    </section>
+    <sidenav ref="left"></sidenav>
+</section>

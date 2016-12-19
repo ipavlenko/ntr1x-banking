@@ -1,0 +1,19 @@
+<md-sidenav class="md-left" ref="sidenav">
+    <md-toolbar>
+        <div class="md-toolbar-container">
+            <h3 class="md-title">Navigation</h3>
+        </div>
+    </md-toolbar>
+    <md-list>
+        <md-subheader>Pages</md-subheader>
+        <md-list-item @click.prevent="$router.push({ path: '/private/accounts' })">
+            <md-icon>credit_card</md-icon> <span>Accounts</span>
+        </md-list-item>
+        <md-list-item @click.prevent="$router.push({ path: '/private/contacts' })">
+            <md-icon>email</md-icon> <span>Contacts</span>
+        </md-list-item>
+        <md-list-item @click.prevent="$router.push({ path: '/private/profile' })">
+            <md-icon>account_box</md-icon> <span>Profile</span>
+        </md-list-item>
+    </md-list>
+</md-sidenav>

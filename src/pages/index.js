@@ -1,15 +1,13 @@
 import Private from './Private/Private'
-import About from './About/About'
-import Bills from './Bills/Bills'
-import Signin from './Signin/Signin'
-import Calendar from './Calendar/Calendar'
+import Accounts from './Accounts/Accounts'
+import Contacts from './Contacts/Contacts'
 import Profile from './Profile/Profile'
+import Signin from './Signin/Signin'
 
 export default {
     Private,
-    About,
-    Bills,
-    Signin,
-    Calendar,
-    Profile
+    Accounts,
+    Contacts,
+    Profile,
+    Signin
 }
