@@ -1,5 +1,5 @@
-<section class="my my-bills">
-    <section class="my my-header">
+<section class="accounts" ref="body">
+    <header>
         <md-toolbar>
             <md-button class="md-icon-button" @click="$refs.left.toggle()">
                 <md-icon>menu</md-icon>
@@ -9,8 +9,24 @@
                 <md-icon>refresh</md-icon>
             </md-button>
         </md-toolbar>
-    </section>
-    <section class="my my-body">
-    </section>
+    </header>
+    <main>
+        <div class="cards">
+            <div class="card-item" v-for="(card, i) in cards" :style="{
+                'top': i > index ? '100%' : '50%',
+                'left': '50%',
+                'margin-top': i > index ? '-20px' : '0px',
+                'z-index': (i > index) ? 200 - i : 100 + i
+            }">
+                <div class="item-content" :style="{
+                    'top': top(i),
+                    'bottom': bottom(i),
+                    'transform-origin': 'top',
+                    'transform': transform(i),
+                    'background-image': card.background
+                }"></div>
+            </div>
+        </div>
+    </main>
     <sidenav ref="left"></sidenav>
 </section>

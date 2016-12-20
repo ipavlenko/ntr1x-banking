@@ -1,5 +1,10 @@
 export default {
     name: 'private',
+    data: function() {
+        return {
+            transitionName: this.transitionName
+        }
+    },
     watch: {
         $route: function(to, from) {
             const toDepth = to.path.split('/').length

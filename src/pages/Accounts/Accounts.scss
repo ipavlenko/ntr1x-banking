@@ -1,4 +1,4 @@
-.my.my-bills {
+section.accounts {
 
     position: absolute;
     top: 0;
@@ -6,8 +6,7 @@
     right: 0;
     bottom: 0px;
 
-    >.my.my-header {
-
+    >header {
         position: absolute;
         top: 0;
         left: 0;
@@ -15,14 +14,49 @@
         height: 64px;
     }
 
-    >.my.my-body {
-
+    >main {
         position: absolute;
+        z-index: 0;
         top: 64px;
         left: 0;
         right: 0;
         bottom: 0px;
-        background-color: red;
-        overflow-y: scroll;
+        background-color: #37474F;
+        overflow-y: hidden;
+
+        >.cards {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            overflow: visible;
+
+            >.card-item {
+                position: absolute;
+
+                >.item-content {
+                    position: absolute;
+                    background-color: #FFFFFF;
+                    width: 320px;
+                    height: 200px;
+                    margin-left: -160px;
+                    margin-top: -100px;
+                    border-radius: 20px;
+                    padding: 10px;
+
+                    background-size: cover;
+
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                    transform-origin: center;
+                    transition: 0.4s cubic-bezier(0.28, 0.55, 0.385, 1.65);
+                    cursor: pointer;
+
+                    &.bottom {
+                        bottom: -180px;
+                    }
+                }
+            }
+        }
     }
 }

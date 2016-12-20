@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "eslint-plugin-promise": "^2.0.1",
+    "jquery": "^3.1.1",
+    "jquery-touch-events": "^1.0.7",
     "lodash": "^4.17.2",
     "node-sass": "^4.0.0",
     "sass-loader": "^4.1.0",

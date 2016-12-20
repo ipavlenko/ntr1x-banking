@@ -11,6 +11,11 @@ import Pages from 'pages'
 
 import App from './App'
 
+import $ from 'jquery'
+import jQueryTouchEvents from 'jquery-touch-events'
+
+jQueryTouchEvents($)
+
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(VueResource)

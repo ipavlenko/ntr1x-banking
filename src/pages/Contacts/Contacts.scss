@@ -1,4 +1,4 @@
-.my.my-bills {
+section.contacts {
 
     position: absolute;
     top: 0;
@@ -6,8 +6,7 @@
     right: 0;
     bottom: 0px;
 
-    >.my.my-header {
-
+    >header {
         position: absolute;
         top: 0;
         left: 0;
@@ -15,14 +14,14 @@
         height: 64px;
     }
 
-    >.my.my-body {
-
+    >main {
         position: absolute;
+        z-index: 0;
         top: 64px;
         left: 0;
         right: 0;
         bottom: 0px;
-        background-color: red;
-        overflow-y: scroll;
+        background-color: #37474F;
+        overflow-y: hidden;
     }
 }
