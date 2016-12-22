@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import _ from 'lodash'
 
 export default {
     name: 'accounts',
@@ -14,27 +15,27 @@ export default {
             {
                 offset: 0,
                 title: 'Bank Name',
-                background: 'url("/static/img/cards/1.png")'
+                background: 'url("./static/img/cards/1.png")'
             },
             {
                 offset: 0,
                 title: 'Your Bank',
-                background: 'url("/static/img/cards/2.png")'
+                background: 'url("./static/img/cards/2.png")'
             },
             {
                 offset: 0,
                 title: 'Walmart',
-                background: 'url("/static/img/cards/3.png")'
+                background: 'url("./static/img/cards/3.png")'
             },
             {
                 offset: 0,
                 title: 'Second Bank Name',
-                background: 'url("/static/img/cards/1.png")'
+                background: 'url("./static/img/cards/1.png")'
             },
             {
                 offset: 0,
                 title: 'Another Bank',
-                background: 'url("/static/img/cards/2.png")'
+                background: 'url("./static/img/cards/2.png")'
             }
         ]
 
@@ -85,7 +86,7 @@ export default {
             }
         })
 
-        $(this.$refs.body).on('tapmove', (e, touch) => {
+        let move = (e, touch) => {
 
             if (this.dragged) {
 
@@ -128,6 +129,17 @@ export default {
                     this.index++
                 }
             }
+        }
+
+        let debounced = _.debounce(function(e, touch) {
+            move(e, touch)
+        }, 50, {
+            leading: true,
+            maxWait: 50
+        })
+
+        $(this.$refs.body).on('tapmove', (e, touch) => {
+            debounced(e, touch)
         })
     }
 }

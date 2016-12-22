@@ -14,6 +14,9 @@ import App from './App'
 import $ from 'jquery'
 import jQueryTouchEvents from 'jquery-touch-events'
 
+import 'roboto-fontface/css/roboto/sass/roboto-fontface.scss'
+import 'material-design-icons-iconfont/dist/material-design-icons.scss'
+
 jQueryTouchEvents($)
 
 Vue.use(Vuex)
@@ -38,7 +41,7 @@ const store = new Vuex.Store({
 const routes = [
     {
         path: '/',
-        redirect: '/private/about'
+        redirect: { path: '/private/accounts' }
     },
     {
         path: '/private',
@@ -72,7 +75,8 @@ const routes = [
 ]
 
 const router = new VueRouter({
-    mode: 'history',
+    //mode: window.cordova ? 'hash' : 'history',
+    mode: 'hash',
     routes
 })
 

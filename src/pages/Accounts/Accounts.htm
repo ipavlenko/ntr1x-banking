@@ -11,13 +11,13 @@
         </md-toolbar>
     </header>
     <main>
-        <div class="cards">
+        <div class="cards" draggable="false">
             <div class="card-item" v-for="(card, i) in cards" :style="{
                 'top': i > index ? '100%' : '50%',
                 'left': '50%',
                 'margin-top': i > index ? '-20px' : '0px',
                 'z-index': (i > index) ? 200 - i : 100 + i
-            }">
+            }" draggable="false">
                 <div class="item-content" :style="{
                     'top': top(i),
                     'bottom': bottom(i),

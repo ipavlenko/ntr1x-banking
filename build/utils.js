@@ -1,12 +1,52 @@
 var path = require('path')
-var config = require('../config')
+var projectRoot = path.resolve(__dirname, '../')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-exports.assetsPath = function (_path) {
-    var assetsSubDirectory = process.env.NODE_ENV === 'production'
-        ? config.build.assetsSubDirectory
-        : config.dev.assetsSubDirectory
-    return path.posix.join(assetsSubDirectory, _path)
+exports.moduleLoaders = function (options) {
+    return [
+        {
+            test: /\.vue$/,
+            loader: 'vue'
+        },
+        {
+            test: /\.theme$/,
+            loaders: ['raw', 'sass-loader']
+        },
+        {
+            test: /\.js$/,
+            loader: 'babel',
+            include: projectRoot,
+            exclude: /node_modules/
+        },
+        {
+            test: /\.es$/,
+            loader: 'babel',
+            include: projectRoot,
+            exclude: /node_modules/
+        },
+        {
+            test: /\.json$/,
+            loader: 'json'
+        },
+        {
+            test: /\.(png|jpe?g|gif)(\?.*)?$/,
+            loader: 'url',
+            query: {
+                limit: 10000,
+                name: 'img/[name].[hash:7].[ext]',
+                publicPath: options.imagesPublicPath
+            }
+        },
+        {
+            test: /\.(woff2?|eot|ttf|otf|svg)(\?.*)?$/,
+            loader: 'url',
+            query: {
+                limit: 10000,
+                name: 'fonts/[name].[hash:7].[ext]',
+                publicPath: options.fontsPublicPath
+            }
+        },
+    ]
 }
 
 exports.cssLoaders = function (options) {
@@ -58,4 +98,27 @@ exports.styleLoaders = function (options) {
         })
     }
     return output
+}
+
+exports.modulePreLoaders = function(options) {
+    return [
+        {
+            test: /\.vue$/,
+            loader: 'eslint',
+            include: projectRoot,
+            exclude: /node_modules/
+        },
+        {
+            test: /\.js$/,
+            loader: 'eslint',
+            include: projectRoot,
+            exclude: /node_modules/
+        },
+        {
+            test: /\.es$/,
+            loader: 'eslint',
+            include: projectRoot,
+            exclude: /node_modules/
+        }
+    ]
 }

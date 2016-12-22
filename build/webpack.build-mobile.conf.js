@@ -1,31 +1,69 @@
 var path = require('path')
-var config = require('../config')
+var config = require('../config/build-mobile')
 var utils = require('./utils')
 var webpack = require('webpack')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var env = config.build.env
+var env = config.env
 
-var webpackConfig = merge(baseWebpackConfig, {
-    module: {
-        loaders: utils.styleLoaders({ sourceMap: config.build.productionSourceMap, extract: true })
+var webpackConfig = {
+    entry: {
+        app: './src/main.js'
     },
-    devtool: config.build.productionSourceMap ? '#source-map' : false,
     output: {
-        path: config.build.assetsRoot,
-        filename: utils.assetsPath('js/[name].[chunkhash].js'),
-        chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+        path: path.resolve(__dirname, '../dist/mobile/static'),
+        publicPath: config.assetsPublicPath,
+        filename: 'js/[name].[chunkhash].js',
+        chunkFilename: 'js/[id].[chunkhash].js'
     },
+    resolve: {
+        extensions: ['', '.js', '.vue'],
+        fallback: [path.join(__dirname, '../node_modules')],
+        alias: {
+            'vue$': 'vue/dist/vue.common.js',
+            'src': path.resolve(__dirname, '../src'),
+            'assets': path.resolve(__dirname, '../src/assets'),
+            'components': path.resolve(__dirname, '../src/components'),
+            'pages': path.resolve(__dirname, '../src/pages'),
+            'stores': path.resolve(__dirname, '../src/stores')
+        }
+    },
+    resolveLoader: {
+        fallback: [path.join(__dirname, '../node_modules')]
+    },
+    module: {
+        preLoaders: utils.modulePreLoaders({}),
+        loaders: [
+            ...utils.moduleLoaders({
+                imagesPublicPath: '../',
+                fontsPublicPath: '../',
+            }),
+            ...utils.styleLoaders({ sourceMap: config.productionSourceMap, extract: true }),
+        ]
+    },
+    devtool: config.productionSourceMap ? '#source-map' : false,
     vue: {
         loaders: utils.cssLoaders({
-            sourceMap: config.build.productionSourceMap,
+            sourceMap: config.productionSourceMap,
             extract: true
-        })
+        }),
+        postcss: [
+            require('autoprefixer')({
+                browsers: ['last 2 versions']
+            })
+        ]
+    },
+    eslint: {
+        formatter: require('eslint-friendly-formatter')
     },
     plugins: [
         // http://vuejs.github.io/vue-loader/en/workflow/production.html
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        }),
         new webpack.DefinePlugin({
             'process.env': env
         }),
@@ -36,12 +74,12 @@ var webpackConfig = merge(baseWebpackConfig, {
         }),
         new webpack.optimize.OccurrenceOrderPlugin(),
         // extract css into its own file
-        new ExtractTextPlugin(utils.assetsPath('css/[name].[contenthash].css')),
+        new ExtractTextPlugin('css/[name].[contenthash].css'),
         // generate dist index.html with correct asset hash for caching.
         // you can customize output by editing /index.html
         // see https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
-            filename: config.build.index,
+            filename: config.index,
             template: 'index.html',
             inject: true,
             minify: {
@@ -75,9 +113,9 @@ var webpackConfig = merge(baseWebpackConfig, {
             chunks: ['vendor']
         })
     ]
-})
+}
 
-if (config.build.productionGzip) {
+if (config.productionGzip) {
     var CompressionWebpackPlugin = require('compression-webpack-plugin')
 
     webpackConfig.plugins.push(
@@ -86,7 +124,7 @@ if (config.build.productionGzip) {
             algorithm: 'gzip',
             test: new RegExp(
                 '\\.(' +
-                config.build.productionGzipExtensions.join('|') +
+                config.productionGzipExtensions.join('|') +
                 ')$'
             ),
             threshold: 10240,
