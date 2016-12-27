@@ -1,7 +1,9 @@
 import Sidenav from './Sidenav/Sidenav.vue'
+import ContactsList from './ContactsList/ContactsList.vue'
 
 const options = {
-    Sidenav
+    Sidenav,
+    ContactsList
 }
 
 options.install = function(Vue) {

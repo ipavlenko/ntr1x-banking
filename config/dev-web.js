@@ -2,7 +2,7 @@ var path = require('path')
 
 module.exports = {
     env: { NODE_ENV: '"development"' },
-    port: 80,
+    port: 8080,
     assetsPublicPath: '/',
     proxyTable: {},
     // proxyTable: {},

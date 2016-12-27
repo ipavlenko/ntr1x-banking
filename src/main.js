@@ -34,7 +34,8 @@ const store = new Vuex.Store({
     strict: true,
     modules: {
         security: new Stores.Security(),
-        bills: new Stores.Bills()
+        bills: new Stores.Bills(),
+        contacts: new Stores.Contacts()
     }
 })
 

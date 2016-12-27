@@ -11,6 +11,8 @@ export default {
     },
     created: function() {
 
+        console.log('Hello!!!!s');
+
         this.cards = [
             {
                 offset: 0,
